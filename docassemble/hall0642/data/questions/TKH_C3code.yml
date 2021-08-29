@@ -1,0 +1,62 @@
+---
+code: |
+  if TKH_report == 'under-consent':
+    for TKHa_person in TKHpersons:
+      # age test
+      if TKHa_person['Age'] <= 60:
+        TKHage_ok = True
+      else:
+        TKHage_ok = False
+      
+       # consent test
+      if TKHa_person['AZ eligbility'] == 'Has consented to receiving AZ':
+        TKHconsent_ok = True
+      else:
+        TKHconsent_ok = False
+     
+      if TKHage_ok and TKHconsent_ok:
+        TKHselected_persons.append(TKHa_person)
+  
+  elif TKH_report == 'under-no':
+    for TKHa_person in TKHpersons:
+      # age test
+      if TKHa_person['Age'] <= 60:
+        TKHage_ok = True
+      else:
+        TKHage_ok = False
+      
+       # consent test
+      if TKHa_person['AZ eligbility'] == 'Has not consented to receiving AZ':
+        TKHconsent_ok = True
+      else:
+        TKHconsent_ok = False
+     
+      if TKHage_ok and TKHconsent_ok:
+        TKHselected_persons.append(TKHa_person)
+      
+      
+  elif TKH_report == 'every-yes':
+    for TKHa_person in TKHpersons:
+      # age test
+      if TKHa_person['Age'] <= 60:
+        TKHage_ok = True
+      else:
+        TKHage_ok = False
+        
+      if TKHa_person['Age'] > 60:
+        TKHage_old = True
+      else:
+        TKHage_old = False
+      
+       # consent test
+      if TKHa_person['AZ eligbility'] == 'Has consented to receiving AZ':
+        TKHconsent_ok = True
+      else:
+        TKHconsent_ok = False
+     
+      if TKHage_ok and TKHconsent_ok or TKHage_old:
+        TKHselected_persons.append(TKHa_person)
+      
+        
+  TKHselected_persons.gathered = True
+---

@@ -1,0 +1,117 @@
+---
+features:
+  css: C3_pretty.css
+---
+include:
+  - TKH_C3que.yml
+  - TKH_C3dict.yml
+  - TKH_C3code.yml
+---
+objects:
+  - TKHselected_persons: DAList.using(there_are_any=True, auto_gather=False)
+---
+mandatory: True
+code: |
+  TKH_welcome_screen
+  
+  if (TKH_age <= 60) and (TKH_appconsent == True):
+    TKH_end_screen
+  elif (TKH_age > 60):
+    TKH_end_screen
+  else:
+    TKH_not
+---
+code: |
+  TKH_welcome_screen = True
+---
+event: TKH_welcome_screen
+question: |
+  <span class="TKHheader">
+  Welcome
+  </span>
+subquestion: |
+  <span class="TKHimportant">
+  Welcome
+  </span>
+  
+  This application will run through some questions to determeine a patient's elgibility for recieving the Astra Zeneca vaccine. This application, in conjuction, can also display a list of patients who will be or will not be receving the AZ vaccine if you wish 
+  
+  If you would not like to find out if the patient is elgibile to recieve the AZ vaccine please press exit to be redirected to the SA health website.   
+  
+  <span class="TKHdisclaimer">
+  **Disclaimer:** 
+  </span>
+  This application does not constitute as medical or legal advice.
+buttons:
+- Exit: exit
+  url: http://www.sahealth.sa.gov.au
+- Continue: continue
+---
+event: TKH_not
+question: |
+  <span class="TKHheader">
+  Cannot continue
+  </span>
+subquestion: |
+  Sorry, the app can only run if the patient is over the age of 60 or if the patients's age is less than 60 and they have consented to the app being run, after being consulted on the risk of recieving the AZ vaccine.
+  
+  If you have made a mistake and would like to resart you may do so, by clicking restart. 
+  
+  Otherwise please press the exit button to be redirected to the SA health website.
+buttons:
+- Exit: exit
+  url: http://www.sahealth.sa.gov.au
+- Restart: restart
+---
+event: TKH_end_screen
+question: |
+  <span class="TKHheader">
+  Eligbility
+  </span>
+Subquestion: |
+  
+  <span class="TKHimportant">
+  You have completed the questionaire, please check elgibility, responses and patient report below.
+  </span>
+
+   %if (TKH_age <= 60) and (TKH_consent == True):
+  Patient name: ${ TKH_name } 
+  
+  Has consented to recieving the AZ vaccine.
+  
+  %elif (TKH_age <= 60) and (TKH_consent == False):
+  Patient name: ${ TKH_name } 
+  
+  Has not consented to receiving the AZ vaccine.
+  
+  %else:
+  ${ TKH_name }, must recieve the AZ vaccine as they are over the age of 60.
+  
+  %endif
+  
+  %if (TKH_report == 'Nobody'):
+  You have elected not to recieve a patient report.
+  
+  %else:
+  ${ TKHselected_persons_table }
+  
+  %endif
+   
+   
+buttons:
+ - Exit: exit
+   url: http://www.sahealth.sa.gov.au
+ - Book an appointment: logout
+   url: https://www.sahealth.sa.gov.au/wps/wcm/connect/public+content/sa+health+internet/conditions/infectious+diseases/covid-19/vaccine/getting+vaccinated/booking+your+vaccination+appointment/booking+your+vaccination+appointment
+ - Restart: restart
+---
+table: TKHselected_persons_table
+rows: TKHselected_persons
+columns:
+  - Patient Name: |
+      row_item['Name']
+  - Patient's Age: |
+      row_item['Age']
+  - AZ eligibility: |
+      row_item['AZ eligbility']
+---

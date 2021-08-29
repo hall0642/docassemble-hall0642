@@ -1,0 +1,29 @@
+---
+variable name: TKHpersons
+use objects: True
+data:
+  - Name: Covid Attenborough
+    Age: 95
+    AZ eligbility: 'must recieve AZ'
+  - Name: Anthony Jaboshua 
+    Age: 31
+    AZ eligbility: 'Has consented to receiving AZ'
+  - Name: Robert Lock-downey Jr 
+    Age: 56
+    AZ eligbility: 'Has not consented to receiving AZ'
+  - Name: Catherine AZeta-jones
+    Age: 51
+    AZ eligbility: 'Has consented to receiving AZ'
+  - Name: Mederna Mcgonnagal
+    Age: 101
+    AZ eligbility: 'must recieve AZ'
+  - Name: Pfizer Minnelli
+    Age: 75
+    AZ eligbility: 'must recieve AZ'
+  - Name: Constance Wu
+    Age: 39
+    AZ eligbility: 'Has consented to receiving AZ'
+  - Name: Domonic Cornona Toretto
+    Age: 40
+    AZ eligbility: 'Has not consented to receiving AZ'
+---

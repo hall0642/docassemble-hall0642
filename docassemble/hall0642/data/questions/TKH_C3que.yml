@@ -1,0 +1,40 @@
+question: |
+  <span class="TKHheader">
+  What is the patients age?
+  </span>
+fields: 
+  no label: TKH_age
+  datatype: integer
+---
+question: |
+  <span class="TKHheader">
+  Has the patient consented to you running this app?
+  </span>
+yesno: TKH_appconsent
+---
+question: |
+  <span class="TKHheader">
+  What is the patients name?
+  </span>
+subquestion: |
+  Please use their full name.
+fields:
+  - no label: TKH_name
+---
+question: |
+  <span class="TKHheader">
+  Does the patient consent to receiveing the Astara Zenica vaccine?
+  </span>
+yesno: TKH_consent
+---
+question: |
+  <span class="TKHheader">
+  Please select which patients you would like displayed in the report:
+  </span>
+field: TKH_report
+dropdown:
+   - Only under 60s who have consented to receiving AZ vaccine: under-consent
+   - Only under 60s who have not consented to receiving AZ vaccine: under-no
+   - Everyone receving AZ vaccine: every-yes
+   - I do not want to see any other patients eligibility: Nobody
+---
